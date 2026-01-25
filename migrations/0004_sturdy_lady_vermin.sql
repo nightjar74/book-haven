@@ -1,0 +1,1 @@
+ALTER TABLE "books" ADD COLUMN "borrow_count" integer DEFAULT 0 NOT NULL;
