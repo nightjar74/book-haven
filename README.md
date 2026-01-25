@@ -58,7 +58,7 @@ Make sure you have the following installed on your machine:
 **Cloning the Repository**
 
 ```bash
-git clone https://github.com/nightjar74/bookHaven.git
+git clone https://github.com/nightjar74/book-haven.git
 cd bookHaven
 ```
 
