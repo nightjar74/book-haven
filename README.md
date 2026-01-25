@@ -98,7 +98,7 @@ QSTASH_CURRENT_SIGNING_KEY=
 QSTASH_NEXT_SIGNING_KEY=
 ```
 
-Replace the placeholder values with your actual ImageKit, NeonDB, Upstash, and Resend credentials.
+Replace the placeholder values with your actual ImageKit, NeonDB, Upstash.
 
 ## 🧪 Database & Seeding
 
