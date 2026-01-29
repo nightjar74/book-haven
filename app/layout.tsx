@@ -8,6 +8,8 @@ import { SessionProvider } from "next-auth/react";
 import { auth } from "@/auth";
 import { SpeculationRules } from "./speculationRules";
 import { IBM_Plex_Serif } from "next/font/google";
+import { I18nProvider } from "./providers/I18nProvider";
+import { cookies } from "next/headers";
 
 const ibmPlexSerif = IBM_Plex_Serif({
   subsets: ["latin"],
@@ -39,6 +41,24 @@ export const metadata: Metadata = {
 
 const RootLayout = async ({ children }: { children: ReactNode }) => {
   const session = await auth();
+  const cookieStore = await cookies();
+
+  const locale = cookieStore.get("NEXT_LOCALE")?.value || "en";
+  let translations;
+  try {
+    switch (locale) {
+      case "fr":
+        translations = (await import("@/messages/fr.json")).default;
+        break;
+      case "de":
+        translations = (await import("@/messages/de.json")).default;
+        break;
+      default:
+        translations = (await import("@/messages/en.json")).default;
+    }
+  } catch (error) {
+    translations = (await import("@/messages/en.json")).default;
+  }
 
   return (
     <html lang="en">
@@ -46,10 +66,12 @@ const RootLayout = async ({ children }: { children: ReactNode }) => {
         <body
           className={`${ibmPlexSans.className} ${bebasNeue.variable} ${ibmPlexSerif.variable} antialiased`}
         >
-          <SpeculationRules prerenderAllBooksOnHover={true} />
-          {children}
+          <I18nProvider locale={locale} translations={translations}>
+            <SpeculationRules prerenderAllBooksOnHover={true} />
+            {children}
 
-          <Toaster />
+            <Toaster />
+          </I18nProvider>
         </body>
       </SessionProvider>
     </html>

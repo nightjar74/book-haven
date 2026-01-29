@@ -13,15 +13,53 @@ export const navigationLinks = [
 ];
 
 export const navLinks = [
+  { titleKey: "nav.mostRented", href: "/category/most-rented" },
+  { titleKey: "nav.recommended", href: "/category/recommended" },
+  { titleKey: "nav.events", href: "/category/events" },
+  { titleKey: "nav.projects", href: "/category/projects" },
+  { titleKey: "nav.requestBook", href: "/request-book" },
+  { titleKey: "nav.myBooks", href: "/my-profile" },
+];
+
+/* export const navLinks = [
   { title: "Most Rented", href: "/category/most-rented" },
   { title: "Recommended", href: "/category/recommended" },
   { title: "Events", href: "/category/events" },
   { title: "Projects", href: "/category/projects" },
   { title: "Request a Book", href: "/request-book" },
   { title: "My Books", href: "/my-profile" },
-];
+]; */
 
 export const adminSideBarLinks = [
+  { img: "/icons/admin/home.svg", route: "/admin", textKey: "admin.home" },
+  {
+    img: "/icons/admin/users.svg",
+    route: "/admin/users",
+    textKey: "admin.allUsers",
+  },
+  {
+    img: "/icons/admin/book.svg",
+    route: "/admin/books",
+    textKey: "admin.allBooks",
+  },
+  {
+    img: "/icons/admin/bookmark.svg",
+    route: "/admin/book-requests",
+    textKey: "admin.bookRequests",
+  },
+  {
+    img: "/icons/admin/bookmark.svg",
+    route: "/admin/collections",
+    textKey: "admin.collections",
+  },
+  {
+    img: "/icons/admin/bookmark.svg",
+    route: "/admin/borrow-requests",
+    textKey: "admin.borrowRequests",
+  },
+];
+
+/* export const adminSideBarLinks = [
   {
     img: "/icons/admin/home.svg",
     route: "/admin",
@@ -52,7 +90,7 @@ export const adminSideBarLinks = [
     route: "/admin/borrow-requests",
     text: "Borrow Requests",
   },
-];
+]; */
 
 export const FIELD_NAMES = {
   fullName: "Full name",

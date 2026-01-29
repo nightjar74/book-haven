@@ -16,6 +16,7 @@ import {
   Twitter,
   Youtube,
 } from "lucide-react";
+import { LanguagePicker } from "@/components/LanguagePicker";
 
 const Layout = async ({ children }: { children: ReactNode }) => {
   const session = await auth();
@@ -53,7 +54,9 @@ const Layout = async ({ children }: { children: ReactNode }) => {
                 <Navigation size={17} className="text-white" />
                 <p className="text-white text-[18px]">Address</p>
               </a>
-              <p className="text-white text-18px] ml-5">+975 2 00 00 00</p>
+              <p className="text-white text-[18px] ml-5 min-w-fit">
+                +975 2 00 00 00
+              </p>
               <div className="flex gap-4 flex-row ml-5">
                 <a
                   href="#"
@@ -76,6 +79,9 @@ const Layout = async ({ children }: { children: ReactNode }) => {
                 >
                   <Instagram className="w-5 h-5" />
                 </a>
+              </div>
+              <div className="w-full flex justify-end">
+                <LanguagePicker color="white" />
               </div>
             </div>
           </div>

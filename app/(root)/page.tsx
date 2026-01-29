@@ -6,9 +6,11 @@ import { desc } from "drizzle-orm";
 import Hero from "@/components/Hero";
 import { getBooksByGenres, getCollections } from "@/lib/actions/data-fetchers";
 import { redirect } from "next/navigation";
+import { getServerLocale } from "@/lib/getServerLocale";
 
 const Home = async () => {
   const session = await auth();
+  //const locale = await getServerLocale();
 
   if (!session) return redirect("/sign-in");
 

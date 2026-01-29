@@ -5,6 +5,7 @@ import {
   SheetContent,
   SheetTrigger,
   SheetTitle,
+  SheetFooter,
 } from "@/components/ui/sheet";
 import { Button } from "./ui/button";
 import { Menu } from "lucide-react";
@@ -16,6 +17,8 @@ import { navLinks } from "@/constants";
 import { Session } from "next-auth";
 import SearchBar from "./SearchBar";
 import { handleSignOut } from "@/lib/actions/handleSignOut";
+import { useLocale } from "@/app/providers/I18nProvider";
+import { LanguagePicker } from "./LanguagePicker";
 
 const MobileHeader = ({
   session,
@@ -24,6 +27,7 @@ const MobileHeader = ({
   session: Session;
   isAdmin: boolean;
 }) => {
+  const { t } = useLocale();
   const [isOpen, setIsOpen] = useState(false);
   return (
     <div className="flex md:hidden flex-col w-full pb-0 px-4 gap-4 bg-transparent">
@@ -45,10 +49,15 @@ const MobileHeader = ({
                     href={link.href}
                     className="text-lg font-medium"
                   >
-                    {link.title}
+                    {t(link.titleKey)}
                   </Link>
                 ))}
               </nav>
+              <SheetFooter>
+                <div className="absolute bottom-5 w-[150px] flex justify-start mt-4 bg-green-200">
+                  <LanguagePicker color="black" />
+                </div>
+              </SheetFooter>
             </SheetContent>
           </Sheet>
 

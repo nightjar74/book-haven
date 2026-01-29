@@ -21,7 +21,7 @@ const imagekit = new ImageKit({
   privateKey: process.env.IMAGEKIT_PRIVATE_KEY!,
 });
 // set to true to verify data without making changes to database
-const DRY_RUN = true;
+const DRY_RUN = false;
 
 const ISBNs = [
   9780141439518, // Pride and Prejudice

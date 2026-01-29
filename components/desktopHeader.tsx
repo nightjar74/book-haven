@@ -8,6 +8,7 @@ import { Session } from "next-auth";
 import SearchBar from "./SearchBar";
 import { navLinks } from "@/constants";
 import { handleSignOut } from "@/lib/actions/handleSignOut";
+import TnavLinks from "./TnavLinks";
 
 const DesktopHeader = ({
   session,
@@ -53,13 +54,14 @@ const DesktopHeader = ({
           </ul>
         </div>
       </div>
-      <div className="z-25 w-full flex flex-row justify-between px-10 mt-5">
+      <TnavLinks />
+      {/*       <div className="z-25 w-full flex flex-row justify-between px-10 mt-5">
         {navLinks.map((link, i) => (
           <Link key={i} href={link.href} className="cursor-pointer">
             <p className="z-25 text-lg text-white my-2">{link.title}</p>
           </Link>
         ))}
-      </div>
+      </div> */}
     </div>
   );
 };

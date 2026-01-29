@@ -7,9 +7,12 @@ import { cn } from "@/lib/utils";
 import { usePathname } from "next/navigation";
 import { Session } from "next-auth";
 import Popover from "./ui/userPopover";
+import { use } from "react";
+import { useLocale } from "@/app/providers/I18nProvider";
 
 const Sidebar = ({ session }: { session: Session }) => {
   const pathname = usePathname();
+  const { t } = useLocale();
 
   return (
     <div className="admin-sidebar">
@@ -39,7 +42,7 @@ const Sidebar = ({ session }: { session: Session }) => {
                 <div
                   className={cn(
                     "link",
-                    isSelected && "bg-primary-admin shadow-sm"
+                    isSelected && "bg-primary-admin shadow-sm",
                   )}
                 >
                   <div className="relative size-5">
@@ -52,7 +55,7 @@ const Sidebar = ({ session }: { session: Session }) => {
                   </div>
 
                   <p className={cn(isSelected ? "text-white" : "text-dark")}>
-                    {link.text}
+                    {t(link.textKey)}
                   </p>
                 </div>
               </Link>

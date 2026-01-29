@@ -1,0 +1,20 @@
+{
+  "nav": {
+    "library": "Bibliothek",
+    "myProfile": "Mein Profil",
+    "mostRented": "Meistgeliehen",
+    "recommended": "Empfohlen",
+    "events": "Veranstaltungen",
+    "projects": "Projekte",
+    "requestBook": "Buch anfragen",
+    "myBooks": "Meine Bücher"
+  },
+  "admin": {
+    "home": "Startseite",
+    "allUsers": "Alle Benutzer",
+    "allBooks": "Alle Bücher",
+    "bookRequests": "Buchanfragen",
+    "collections": "Sammlungen",
+    "borrowRequests": "Ausleihanfragen"
+  }
+}
