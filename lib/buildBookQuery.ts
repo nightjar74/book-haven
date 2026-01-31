@@ -13,7 +13,6 @@ type Filters = {
 
 export async function buildBookQuery(filters: Filters) {
   const { category, genre, author, page = 1, limit = 10 } = filters;
-  const pageNumber = page;
 
   let query = db.select().from(books).$dynamic();
   let countQuery = db.select({ total: count() }).from(books).$dynamic();
@@ -50,10 +49,12 @@ export async function buildBookQuery(filters: Filters) {
     query = query.orderBy(meta.orderBy);
   }
 
-  const offset = (pageNumber - 1) * limit;
-  query = query.limit(limit).offset(offset);
+  const finalLimit = meta.limit ?? limit;
 
-  if (meta.orderBy) query = query.orderBy(meta.orderBy);
+  const offset = (page - 1) * limit;
+  query = query.limit(finalLimit).offset(offset);
 
-  return { query, countQuery };
+  const [fetchedBooks, totalCountRes] = await Promise.all([query, countQuery]);
+
+  return { query: fetchedBooks, countQuery: totalCountRes[0].total };
 }

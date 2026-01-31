@@ -13,12 +13,24 @@ export const navigationLinks = [
 ];
 
 export const navLinks = [
-  { titleKey: "nav.mostRented", href: "/category/most-rented" },
-  { titleKey: "nav.recommended", href: "/category/recommended" },
-  { titleKey: "nav.events", href: "/category/events" },
-  { titleKey: "nav.projects", href: "/category/projects" },
-  { titleKey: "nav.requestBook", href: "/request-book" },
-  { titleKey: "nav.myBooks", href: "/my-profile" },
+  {
+    titleKey: "nav.mostRented",
+    href: "/category/most-rented",
+    title: "Most Rented",
+  },
+  {
+    titleKey: "nav.recommended",
+    href: "/category/recommended",
+    title: "Recommended",
+  },
+  { titleKey: "nav.events", href: "/category/events", title: "Events" },
+  { titleKey: "nav.projects", href: "/category/projects", title: "Projects" },
+  {
+    titleKey: "nav.requestBook",
+    href: "/request-book",
+    title: "Request a Book",
+  },
+  { titleKey: "nav.myBooks", href: "/my-profile", title: "My Books" },
 ];
 
 /* export const navLinks = [

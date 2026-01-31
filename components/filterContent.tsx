@@ -35,7 +35,7 @@ export function FilterContent({
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
-            className="overflow-hidden flex flex-col gap-2 pl-6"
+            className="overflow-y-scroll scrollbar-hide max-h-[400px] flex flex-col gap-2 pl-6"
           >
             {genres.map((g) => (
               <button

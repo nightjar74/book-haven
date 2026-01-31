@@ -36,7 +36,7 @@ export default async function Page({
   const currentPage = Number(page) || 1;
   const decodedCategory = decodeURIComponent(categorySlug);
 
-  const { query, countQuery } = await buildBookQuery({
+  const { query: fetchedBooks, countQuery } = await buildBookQuery({
     category: decodedCategory,
     genre,
     author,
@@ -44,16 +44,12 @@ export default async function Page({
     limit,
   });
 
-  const [allGenres, allAuthors, fetchedBooks, totalCountRes] =
-    await Promise.all([
-      db.selectDistinct({ genre: books.genre }).from(books),
-      db.selectDistinct({ author: books.author }).from(books),
-      query,
-      countQuery,
-    ]);
+  const [allGenres, allAuthors] = await Promise.all([
+    db.selectDistinct({ genre: books.genre }).from(books),
+    db.selectDistinct({ author: books.author }).from(books),
+  ]);
 
-  const totalRecords = totalCountRes[0].total;
-  const totalPages = Math.ceil(totalRecords / limit);
+  const totalPages = Math.ceil(countQuery / limit);
 
   //console.log("genre:", genre, "author:", author, "count:", totalCountRes);
   return (

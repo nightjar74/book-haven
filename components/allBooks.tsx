@@ -43,11 +43,11 @@ function AllBooks({
             coverImage={cover}
             className="w-[80px] h-[100px]"
           />
-          <div className="flex flex-col gap-1 max-w-[100px] md:max-w-full">
-            <p className="md:text-xl text-sm text-black font-semibold line-clamp-3">
+          <div className="flex flex-col gap-1 max-w-[50px] md:max-w-full">
+            <p className="md:text-xl text-[8px] text-black font-semibold line-clamp-3">
               {title}
             </p>
-            <p className="md:text-sm text-xs text-gray-600 line-clamp-2">
+            <p className="md:text-sm text-[7px] text-gray-600 line-clamp-2">
               by {author}
             </p>
           </div>

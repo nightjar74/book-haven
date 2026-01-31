@@ -14,7 +14,7 @@ const TnavLinks = () => {
 
   if (!mounted) {
     return (
-      <div className="z-25 w-full flex flex-row justify-between px-10 mt-5 h-[44px]" />
+      <div className="z-25 w-full flex flex-row justify-between px-10 mt-5 h-[44px]"></div>
     );
   }
   return (

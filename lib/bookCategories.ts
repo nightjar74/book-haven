@@ -23,7 +23,7 @@ export const BOOK_CATEGORIES: Record<string, CategoryHandler> = {
 
   "Most Borrowed": (ctx) => {
     ctx.meta.orderBy = desc(books.borrowCount);
-    ctx.meta.limit = 20;
+    ctx.meta.limit = 50;
   },
 
   /*   Discounts: (ctx) => {

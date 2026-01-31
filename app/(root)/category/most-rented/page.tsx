@@ -3,10 +3,10 @@ import { buildBookQuery } from "@/lib/buildBookQuery";
 import React from "react";
 
 const page = async () => {
-  let books: any[] = [];
-  books = await buildBookQuery({ category: "Most Borrowed" }).then(
-    (res) => res,
-  );
+  const { query: books } = (await buildBookQuery({
+    category: "Most Borrowed",
+  })) as any;
+  //console.log("Most Rented Books:", books);
 
   return (
     <div className="md:mt-0 text-white flex flex-col">

@@ -75,7 +75,7 @@ const AdminCard = ({ collections }: Props) => {
           onClick={clearSelections}
           disabled={isPending}
         >
-          Clear Selected Books
+          Clear Selected
         </Button>
         <Button
           type="submit"

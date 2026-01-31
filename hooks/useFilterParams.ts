@@ -19,6 +19,7 @@ export function useFilterParams(basePath?: string) {
       params.delete(type);
     }
 
+    params.delete("page");
     const targetPath = basePath ?? pathname;
 
     router.replace(`${targetPath}?${params.toString()}`, { scroll: false });

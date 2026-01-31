@@ -54,7 +54,7 @@ const MobileHeader = ({
                 ))}
               </nav>
               <SheetFooter>
-                <div className="absolute bottom-5 w-[150px] flex justify-start mt-4 bg-green-200">
+                <div className="absolute bottom-5 w-[150px] flex justify-start mt-4">
                   <LanguagePicker color="black" />
                 </div>
               </SheetFooter>
