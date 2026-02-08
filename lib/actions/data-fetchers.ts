@@ -450,7 +450,7 @@ export const getFilteredUsers = async (
   currentPage: number,
   isAdminOnly: boolean = false,
 ) => {
-  //console.log(query, currentPage, "query currentpage");
+  console.log(query, currentPage, "query currentpage");
   const ITEMS_PER_PAGE = 4;
   const offset = (currentPage - 1) * ITEMS_PER_PAGE;
 
@@ -459,7 +459,7 @@ export const getFilteredUsers = async (
       try {
         const searchPattern = `%${query.trim()}%`;
         //console.log("searchPattern here:", searchPattern);
-        const data = await sql`
+        const dataPromise = sql`
             SELECT id, full_name, email, role
             FROM users
             WHERE (
@@ -470,7 +470,24 @@ export const getFilteredUsers = async (
             ORDER BY full_name ASC
             LIMIT ${ITEMS_PER_PAGE} OFFSET ${offset}
           `;
-        return data;
+
+        const countPromise = sql`SELECT COUNT(*)
+            FROM users
+            WHERE (full_name ILIKE ${searchPattern} OR email ILIKE ${searchPattern})
+            AND (${isAdminOnly} = false OR role = 'ADMIN')`;
+
+        const [data, countResult] = await Promise.all([
+          dataPromise,
+          countPromise,
+        ]);
+
+        const totalCount = Number(countResult[0].count);
+        const totalPages = Math.ceil(totalCount / ITEMS_PER_PAGE);
+
+        return {
+          users: data,
+          totalPages: totalPages,
+        };
       } catch (error) {
         console.error("Database Error:", error);
         throw new Error("Failed to fetch filtered users.");

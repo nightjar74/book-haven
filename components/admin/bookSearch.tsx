@@ -17,6 +17,7 @@ const BookSearch = () => {
     handleImport,
   } = useBookImport();
 
+  console.log("is open", isOpen, "results", results);
   return (
     <div className="relative w-fulls mb-7" ref={containerRef}>
       <div className="relative">

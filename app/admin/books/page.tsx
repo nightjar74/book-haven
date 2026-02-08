@@ -6,6 +6,7 @@ import AllBooks from "@/components/allBooks";
 import { getBooks, getBooksCount } from "@/lib/actions/data-fetchers";
 import Pagination from "@/components/admin/Pagination";
 import Search from "@/components/admin/search";
+import { redirect } from "next/navigation";
 
 const Page = async (props: {
   searchParams?: Promise<{
@@ -19,12 +20,22 @@ const Page = async (props: {
   //console.log("Query:", query, "Page:", currentPage);
   const limit = 10;
 
+  if (currentPage < 1) {
+    redirect(`/admin/books?page=1`);
+  }
+
   let booksData: any[] = [];
   let totalBooks: number = 0;
   [booksData, totalBooks] = await Promise.all([
     getBooks(query, currentPage, limit),
     getBooksCount(query),
   ]);
+
+  const totalPages = Math.ceil(totalBooks / limit);
+
+  if (currentPage > totalPages && totalPages > 0) {
+    redirect(`/admin/books?page=${totalPages}`);
+  }
 
   return (
     <>
@@ -57,7 +68,7 @@ const Page = async (props: {
               </div>
             ))}
           <div className="w-full flex justify-center">
-            <Pagination totalPages={Math.ceil(totalBooks / limit)} />
+            <Pagination totalPages={totalPages} />
           </div>
         </div>
       </section>

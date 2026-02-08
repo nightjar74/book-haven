@@ -1,5 +1,5 @@
 "use client";
-import React, { useRef, useTransition, useState } from "react";
+import React, { useRef, useTransition, useState, useOptimistic } from "react";
 import Card from "./ui/card";
 import { User } from "@/lib/actions/data-fetchers";
 import Pagination from "./admin/Pagination";
@@ -21,6 +21,11 @@ function AllUsersContext({ totalUsers, limit, users }: Props) {
   const { isOpen, confirm, handleClose } = useModal();
   const { toast } = useToast();
   const [isPending, startTransition] = useTransition();
+  const [optimisticUsers, removeOptimisticUser] = useOptimistic(
+    users,
+    (state, idToDelete: string) =>
+      state.filter((user) => user.id !== idToDelete),
+  );
   const [deletingId, setDeletingId] = useState<string | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -48,13 +53,18 @@ function AllUsersContext({ totalUsers, limit, users }: Props) {
     //console.log("id for user to be deleted:", id);
 
     startTransition(async () => {
-      await new Promise((res) => setTimeout(res, 1500)); // Simulate delay
+      //await new Promise((res) => setTimeout(res, 1500)); // Simulate delay
       //console.log("ispending", isPending);
       startTransition(() => setDeletingId(null));
+      removeOptimisticUser(id);
       const result = await deleteUser(id);
       startTransition(() => setDeletingId(null));
       if (result.success) {
         toast({ title: "Success", description: "User deleted." });
+
+        if (selectedUser.userid === id) {
+          setSelectedUser({ userid: "", isSelected: false, name: "" });
+        }
       } else {
         console.log("Error deleting user:", result.message);
         toast({
@@ -75,7 +85,7 @@ function AllUsersContext({ totalUsers, limit, users }: Props) {
       <h2 className="text-2xl font-bold text-gray-800 mb-6 text-center">
         Users
       </h2>
-      {users.map((user: any) => (
+      {optimisticUsers.map((user: any) => (
         <div key={user.id} onClick={() => handleCardClick(user)}>
           <Card
             user={user.full_name}

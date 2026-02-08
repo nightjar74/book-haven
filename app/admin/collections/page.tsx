@@ -10,6 +10,7 @@ import { BookSelectorProvider } from "@/app/context/book-selector-context";
 import AllBooksSelect from "@/components/bookSelector";
 import Search from "@/components/admin/search";
 import { Collection } from "@/types";
+import { redirect } from "next/navigation";
 
 const NewCollectionPage = async (props: {
   searchParams?: Promise<{
@@ -23,6 +24,10 @@ const NewCollectionPage = async (props: {
   //console.log("Query:", query, "Page:", currentPage);
   const limit = 10;
 
+  if (currentPage < 1) {
+    redirect(`/admin/collections?page=1`);
+  }
+
   let booksData: any[] = [];
   let totalBooks: number = 0;
   let collections: Collection[] = [];
@@ -31,6 +36,11 @@ const NewCollectionPage = async (props: {
     getBooksCount(query),
     getCollectionsWithBookIds(),
   ]);
+
+  const totalPages = Math.ceil(totalBooks / limit);
+  if (currentPage > totalPages && totalPages > 0) {
+    redirect(`/admin/collections?page=${totalPages}`);
+  }
   //console.log("collections: ", collections);
   return (
     <React.Fragment>
@@ -58,7 +68,7 @@ const NewCollectionPage = async (props: {
                 </div>
               ))}
             <div className="w-full flex justify-center">
-              <Pagination totalPages={Math.ceil(totalBooks / limit)} />
+              <Pagination totalPages={totalPages} />
             </div>
           </div>
         </div>

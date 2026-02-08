@@ -21,9 +21,13 @@ export default async function Page({
   const { categorySlug } = await params;
   const { genre, author, page } = await searchParams;
 
+  if (page?.includes("-")) {
+    redirect(`${categorySlug}?page=1`);
+  }
+
   //console.log("page:", page);
 
-  //console.log(categorySlug, "category slug");
+  console.log(categorySlug, "category slug");
   if (categorySlug === "events" || categorySlug === "projects") {
     return (
       <div className="w-full flex justify-center text-slate-500 italic py-10">
@@ -35,6 +39,7 @@ export default async function Page({
   const limit = 25;
   const currentPage = Number(page) || 1;
   const decodedCategory = decodeURIComponent(categorySlug);
+  console.log("decoded category:", decodedCategory);
 
   const { query: fetchedBooks, countQuery } = await buildBookQuery({
     category: decodedCategory,
@@ -50,6 +55,10 @@ export default async function Page({
   ]);
 
   const totalPages = Math.ceil(countQuery / limit);
+
+  if (currentPage > totalPages && totalPages > 0) {
+    redirect(`${categorySlug}?page=${totalPages}`);
+  }
 
   //console.log("genre:", genre, "author:", author, "count:", totalCountRes);
   return (

@@ -9,8 +9,8 @@ export async function deleteUser(userId: string) {
   try {
     await db.delete(users).where(eq(users.id, userId));
 
-    revalidatePath("/dashboard/users");
     revalidateTag("users-cache");
+    revalidatePath("/admin/users");
 
     return { success: true, message: "User deleted successfully" };
   } catch (error) {

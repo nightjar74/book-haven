@@ -4,6 +4,7 @@ import { getReceipts, getReceiptsCount } from "@/lib/actions/data-fetchers";
 import { SelectionProvider } from "@/app/context/receiptSelectionContext";
 import { ReceiptHeader } from "@/components/admin/receiptHeader";
 import Pagination from "@/components/admin/Pagination";
+import { redirect } from "next/navigation";
 
 const Page = async (props: {
   searchParams?: Promise<{
@@ -17,10 +18,19 @@ const Page = async (props: {
   //console.log("Query:", query, "Page:", currentPage);
   const limit = 10;
 
+  if (currentPage < 1) {
+    redirect(`/admin/borrow-requests?page=1`);
+  }
+
   const [allReceipts, totalCount] = await Promise.all([
     getReceipts(query, currentPage, limit),
     getReceiptsCount(query),
   ]);
+
+  const totalPages = Math.ceil(totalCount / limit);
+  if (currentPage > totalPages && totalPages > 0) {
+    redirect(`/admin/borrow-requests?page=${totalPages}`);
+  }
 
   return (
     <SelectionProvider>
@@ -28,7 +38,7 @@ const Page = async (props: {
         <ReceiptHeader />
         <ReceiptsCard allReceipts={allReceipts} />
         <div className="relative w-full bottom-0 flex justify-center items-end mb-2">
-          <Pagination totalPages={Math.ceil(totalCount / limit)} />
+          <Pagination totalPages={totalPages} />
         </div>
       </div>
     </SelectionProvider>
