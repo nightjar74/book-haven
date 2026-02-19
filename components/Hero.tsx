@@ -37,8 +37,8 @@ export default function Hero({ data }: HeroProps) {
   //console.log("data from hero", data);
 
   return (
-    <div className="relative w-full md:h-[550px] h-[300px] flex md:flex-row flex-col overflow-hidden">
-      <div className="relative h-full flex flex-row md:min-w-[1070px] md:w-[1070px] w-full">
+    <div className="relative w-full md:h-[475px] h-[350px] flex md:flex-row flex-col overflow-hidden">
+      <div className="relative h-full flex flex-row md:min-w-[975px] md:w-[975px] w-full">
         <div className="relative w-full h-full mx-2 md:mx-0">
           {images.map((image, index) => (
             <div

@@ -1,4 +1,4 @@
-import { and, count, eq, like } from "drizzle-orm";
+import { and, count, eq, ilike, like } from "drizzle-orm";
 import { db } from "@/database/drizzle";
 import { books } from "@/database/schema";
 import { BOOK_CATEGORIES } from "./bookCategories";
@@ -32,11 +32,11 @@ export async function buildBookQuery(filters: Filters) {
   }
 
   if (genre) {
-    where.push(eq(books.genre, genre));
+    where.push(ilike(books.genre, `%${genre}%`));
   }
 
   if (author) {
-    where.push(like(books.author, `%${author}%`));
+    where.push(ilike(books.author, `%${author}%`));
   }
 
   if (where.length) {

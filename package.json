@@ -10,7 +10,10 @@
     "seed": "npx tsx database/seed.ts",
     "db:generate": "npx drizzle-kit generate",
     "db:migrate": "npx drizzle-kit migrate",
-    "db:studio": "npx drizzle-kit studio"
+    "db:studio": "npx drizzle-kit studio",
+    "test-e2e": "playwright test",
+    "test-e2e:ui": "playwright test --ui",
+    "test-e2e:debug": "playwright test --debug"
   },
   "dependencies": {
     "@heroicons/react": "^2.2.0",
@@ -41,6 +44,7 @@
     "motion": "^12.23.12",
     "next": "^15.4.7",
     "next-auth": "^5.0.0-beta.25",
+    "next-intl": "^4.8.3",
     "node-vibrant": "^4.0.3",
     "postgres": "^3.4.7",
     "radix-ui": "^1.4.3",
@@ -57,6 +61,7 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
+    "@playwright/test": "^1.58.2",
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^16.3.1",
     "@types/bcryptjs": "^2.4.6",

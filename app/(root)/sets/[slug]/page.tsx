@@ -19,17 +19,17 @@ async function sets({ params }: { params: Promise<{ slug: string }> }) {
   }
 
   return (
-    <div className="md:mt-20 mt-[105px] text-white flex flex-col">
-      <div className="md:ml-12 ml-0 md:p-5 p-0 mt-5 md:mt-10 absolute md:left-0 left-5 top-[150px] md:top-[150px] flex flex-row">
-        <h1 className="md:text-[40px] text-[25px] w-[80vw] truncate text-black font-medium">
+    <div className="md:mt-0 mt-[15px] text-white flex flex-col">
+      <div className="md:ml-0 ml-0 md:p-0 p-0 mt-5 md:mt-0 md:left-0 left-5 flex flex-row">
+        <h1 className="md:text-[40px] w-[80vw] ml-[2%] text-black font-medium capitalize text-[25px]">
           {decodedSet}
         </h1>
       </div>
 
-      <div className="w-full px-10 md:px-0 ml-0 md:pl-[10%] flex flex-row">
+      <div className="w-full px-10 md:px-0 ml-0 md:pl-[2%] flex flex-row">
         <BookList
           books={booksInSet}
-          containerClassName="md:mt-10 mt-0"
+          containerClassName="mt-0"
           displayAsWrap={true}
         />
       </div>

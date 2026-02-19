@@ -16,5 +16,19 @@
     "bookRequests": "Buchanfragen",
     "collections": "Sammlungen",
     "borrowRequests": "Ausleihanfragen"
+  },
+  "Genres": {
+    "latestBooks": "Neueste Bücher",
+    "computers": "Computer & Informatik",
+    "JuvenileFiction": "Jugendliteratur"
+  },
+  "notFound": {
+    "message": "404 - Seite nicht gefunden. Die gesuchte Seite könnte entfernt worden sein,",
+    "split": "hat einen anderen Namen oder ist vorübergehend nicht verfügbar."
+  },
+  "category": {
+    "Latest Books": "Neueste Bücher",
+    "Computers": "Computer & Informatik",
+    "Juvenile Fiction": "Jugendliteratur"
   }
 }

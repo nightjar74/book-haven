@@ -1,12 +1,13 @@
 "use client";
 import React from "react";
 import BookCard from "@/components/BookCard";
-import { sampleBooks } from "@/constants";
+import { Genres, sampleBooks } from "@/constants";
 import Link from "next/link";
 import { Book } from "@/types";
 import { CarouselNav } from "./carouselNav";
 import { useCarousel } from "@/hooks/useCarousel";
 import { cn } from "@/lib/utils";
+import { useLocale } from "@/app/providers/I18nProvider";
 
 interface Props {
   title?: string;
@@ -23,6 +24,7 @@ const BookList = ({
   displayAsWrap = false,
   clampLines = false,
 }: Props) => {
+  const { t } = useLocale();
   const { scrollRef, handlePrevious, handleNext, canGoPrevious, canGoNext } =
     useCarousel({
       totalItems: books.length,
@@ -35,7 +37,9 @@ const BookList = ({
       {title && (
         <div className="flex flex-row justify-between">
           <Link href={`/category/${encodeURIComponent(title)}`}>
-            <h2 className="font-bebas-neue text-4xl text-black">{title}</h2>
+            <h2 className="font-bebas-neue text-4xl text-black">
+              {t(Genres.find((g) => g.value === title)?.titleKey || "")}
+            </h2>
           </Link>
           {!displayAsWrap && (
             <CarouselNav

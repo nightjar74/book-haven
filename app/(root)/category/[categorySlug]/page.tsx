@@ -7,6 +7,7 @@ import { buildBookQuery } from "@/lib/buildBookQuery";
 import Filter from "../../../../components/filter";
 import { Button } from "@/components/ui/button";
 import Pagination from "@/components/admin/Pagination";
+import { getTranslations } from "next-intl/server";
 
 export default async function Page({
   params,
@@ -39,6 +40,7 @@ export default async function Page({
   const limit = 25;
   const currentPage = Number(page) || 1;
   const decodedCategory = decodeURIComponent(categorySlug);
+  const t = await getTranslations("category");
   console.log("decoded category:", decodedCategory);
 
   const { query: fetchedBooks, countQuery } = await buildBookQuery({
@@ -62,47 +64,43 @@ export default async function Page({
 
   //console.log("genre:", genre, "author:", author, "count:", totalCountRes);
   return (
-    <div className="md:mt-20 mt-[105px] text-white flex flex-row">
-      <div className="md:ml-12 ml-0 md:p-5 p-0 mt-5 md:mt-10 absolute md:left-0 left-5 top-[150px] md:top-[150px] flex flex-row">
-        <h1 className="md:text-[40px] text-[25px] text-black font-medium">
-          {genre || author
-            ? `Products found by filter: ${fetchedBooks.length}`
-            : `${decodedCategory}`}
-        </h1>
-        <div className="md:hidden">
+    <div className="md:mt-16 mt-[55px] text-white flex flex-row relative items-center">
+      <div className="h-auto absolute top-0 left-0 flex flex-col">
+        <div className="md:ml-0 ml-0 md:p-5 p-0 mt-0 md:mt-0 flex flex-row">
+          <h1 className="md:text-[40px] text-[25px] text-black font-medium ml-5 md:ml-0">
+            {genre || author
+              ? `Products found by filter: ${fetchedBooks.length}`
+              : t(decodedCategory)}
+          </h1>
+          <div className="md:hidden">
+            <Filter
+              authors={allAuthors.map((a) => a.author)}
+              genres={allGenres.map((g) => g.genre)}
+            />
+          </div>
+        </div>
+        <div className="hidden md:block w-full max-w-[350px] min-w-[300px] p-5 ml-0">
           <Filter
             authors={allAuthors.map((a) => a.author)}
             genres={allGenres.map((g) => g.genre)}
           />
         </div>
       </div>
-      <div className="absolute hidden md:block left-0 md:top-[300px] top-[228px] w-full max-w-[350px] min-w-[300px] p-5 ml-12">
-        <Filter
-          authors={allAuthors.map((a) => a.author)}
-          genres={allGenres.map((g) => g.genre)}
-        />
-      </div>
 
-      <div className="w-full min-h-screen md:px-0 px-10 ml-0 md:ml-[350px] flex flex-col">
+      <div className="w-full min-h-screen md:px-0 px-10 ml-0 md:ml-[350px] flex flex-col mt-12">
         <div className="w-full flex flex-row">
           {/*         <div className="xl:w-[300px] lg:w-[350px]" /> */}
           {fetchedBooks.length > 0 ? (
             <BookList
               books={fetchedBooks}
-              containerClassName="md:mt-10 mt-0"
+              containerClassName="md:mt-20 mt-0"
               displayAsWrap={true}
             />
           ) : (
             <div className="w-full py-20 flex flex-col items-center justify-center">
-              <p className="text-xl text-slate-500 italic">
+              <p className="text-xl text-slate-500 italic text-center">
                 No books found matching these filters.
               </p>
-              <Button
-                variant="link"
-                onClick={() => redirect(`/category/${categorySlug}`)}
-              >
-                Clear all filters
-              </Button>
             </div>
           )}
         </div>

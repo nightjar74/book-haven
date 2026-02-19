@@ -130,7 +130,7 @@ const AdminCard = ({ collections }: Props) => {
                               {...field}
                               value={field.value ?? ""}
                               className={cn(
-                                "bg-transparent border-none outline-none w-full text-md leading-tight mt-2 resize-none transition-colors",
+                                "bg-transparent border-none outline-none w-full text-md leading-tight mt-2 field-sizing-content resize-none transition-colors",
                                 isActive ? "text-white/80" : "text-gray-500",
                               )}
                               placeholder="Subtitle"

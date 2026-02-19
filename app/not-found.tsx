@@ -1,35 +1,49 @@
 "use client";
-import React, { useEffect, useRef } from "react";
+import { useHasMounted } from "@/hooks/useHasMounted";
+import React, { use, useCallback, useEffect, useRef } from "react";
+import { useLocale } from "./providers/I18nProvider";
+import { notFound } from "@/constants";
 
 const NotFoundPage = () => {
+  const { t } = useLocale();
+  const hasMounted = useHasMounted();
   const containerRef = useRef<HTMLDivElement>(null);
   const eyeRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const currentRotation = useRef(0);
+
+  const updateEyeRotation = useCallback((mouseX: number, mouseY: number) => {
+    if (!containerRef.current || window.innerWidth < 768) return;
+
+    const rect = containerRef.current.getBoundingClientRect();
+    const centerX = rect.left + rect.width / 2;
+    const centerY = rect.top + rect.height / 2;
+
+    const angleRad = Math.atan2(mouseY - centerY, mouseX - centerX);
+    const angleDeg = angleRad * (180 / Math.PI);
+
+    let diff = angleDeg - (currentRotation.current % 360);
+    if (diff > 180) diff -= 360;
+    if (diff < -180) diff += 360;
+
+    currentRotation.current += diff;
+
+    eyeRefs.current.forEach((eye) => {
+      if (eye) {
+        eye.style.transform = `rotate(${currentRotation.current + 55}deg)`;
+      }
+    });
+  }, []);
 
   useEffect(() => {
+    if (!hasMounted) return;
+
     const handleMouseMove = (event: MouseEvent) => {
-      if (!containerRef.current) return;
-
-      const rect = containerRef.current.getBoundingClientRect();
-      const centerX = rect.left + rect.width / 2;
-      const centerY = rect.top + rect.height / 2;
-
-      const angleRad = Math.atan2(
-        event.clientY - centerY,
-        event.clientX - centerX,
-      );
-      const angleDeg = angleRad * (180 / Math.PI);
-      console.log(angleDeg);
-
-      eyeRefs.current.forEach((eye) => {
-        if (eye) {
-          eye.style.transform = `rotate(${angleDeg + 55}deg)`;
-        }
-      });
+      updateEyeRotation(event.clientX, event.clientY);
     };
 
     window.addEventListener("mousemove", handleMouseMove);
     return () => window.removeEventListener("mousemove", handleMouseMove);
-  }, []);
+  }, [hasMounted, updateEyeRotation]);
 
   return (
     <main className="relative flex min-h-screen flex-col items-center justify-center bg-slate-900 text-white md:overflow-hidden overflow-y-scroll">
@@ -41,7 +55,7 @@ const NotFoundPage = () => {
               ref={(el) => {
                 eyeRefs.current[index] = el;
               }}
-              className="relative h-40 w-40 rounded-full bg-white shadow-2xl ease-out will-change-transform"
+              className="relative h-40 w-40 rounded-full bg-white shadow-2xl transform-transition duration-200 ease-out will-change-transform"
             >
               <div className="hidden md:block absolute top-[12%] right-4 h-[100px] w-[100px] -translate-y-[12%] rounded-full bg-slate-900" />
               <div className="md:hidden absolute top-[12%] right-4 h-[100px] w-[100px] -translate-y-[12%] rounded-full bg-slate-900" />
@@ -51,9 +65,9 @@ const NotFoundPage = () => {
 
         <div className="space-y-2">
           <p className="text-xl text-slate-400 font-medium">
-            404 - Page Not Found. The page you are looking for might have been
+            {t(notFound[0].titleKey)}
             <br />
-            removed, had its name changed, or is temporarily unavailable.
+            {t(notFound[1].titleKey)}
           </p>
         </div>
 

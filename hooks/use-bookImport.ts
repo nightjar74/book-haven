@@ -3,6 +3,7 @@ import { useState, useEffect, useRef } from "react";
 import { useDebounce } from "./useDebounce";
 import { importBookById } from "@/lib/actions/admin/importBook";
 import { toast } from "@/hooks/use-toast";
+import { set } from "zod";
 
 export const useBookImport = () => {
   const [query, setQuery] = useState("");
@@ -10,6 +11,7 @@ export const useBookImport = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isSearching, setIsSearching] = useState(false);
   const [isImporting, setIsImporting] = useState<string | null>(null);
+  const [blocked, setBlocked] = useState(false);
 
   const debouncedQuery = useDebounce(query, 500);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -39,7 +41,7 @@ export const useBookImport = () => {
 
   useEffect(() => {
     const fetchSuggestions = async () => {
-      if (debouncedQuery.length < 3) {
+      if (debouncedQuery.length < 3 || blocked) {
         setResults([]);
         setIsOpen(false);
         return;
@@ -50,6 +52,15 @@ export const useBookImport = () => {
         const res = await fetch(
           `https://www.googleapis.com/books/v1/volumes?q=${encodeURIComponent(debouncedQuery)}&maxResults=6`,
         );
+        if (res.status === 429) {
+          toast({
+            title: "Error",
+            description: `Quota exceeded for Google Books API. Please try again later.`,
+            variant: "destructive",
+          });
+          setBlocked(true);
+          return;
+        }
         const data = await res.json();
         setResults(data.items || []);
         setIsOpen(true);

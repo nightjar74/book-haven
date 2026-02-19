@@ -1,3 +1,5 @@
+import { title } from "process";
+
 export const navigationLinks = [
   {
     href: "/library",
@@ -31,6 +33,19 @@ export const navLinks = [
     title: "Request a Book",
   },
   { titleKey: "nav.myBooks", href: "/my-profile", title: "My Books" },
+];
+
+export const Genres = [
+  { titleKey: "Genres.latestBooks", value: "Latest Books" },
+  { titleKey: "Genres.computers", value: "Computers" },
+  { titleKey: "Genres.JuvenileFiction", value: "Juvenile Fiction" },
+];
+
+export const notFound = [
+  {
+    titleKey: "notFound.message",
+  },
+  {titleKey: "notFound.split"}
 ];
 
 /* export const navLinks = [

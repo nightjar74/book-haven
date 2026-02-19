@@ -46,10 +46,10 @@ const Layout = async ({ children }: { children: ReactNode }) => {
 
   return (
     <>
-      <main className="root-container relative min-w-max">
+      <main className="root-container relative w-full">
         <div className="absolute w-full sm:h-[180px] h-[120px] bg-[#9d3128] z-0 top-0 left-0">
           <div className="hidden sm:block relative top-0 h-12 left-0 bg-[#77211a] z-0 px-[64px]">
-            <div className="mx-auto w-full max-w-[1440px] flex flex-row items-center gap-x-4 h-12">
+            <div className="mx-auto w-full max-w-[1320px] flex flex-row items-center gap-x-4 h-12">
               <a className="flex flex-row items-center gap-x-4 h-12" href="#">
                 <Navigation size={17} className="text-white" />
                 <p className="text-white text-[18px]">Address</p>
@@ -86,7 +86,7 @@ const Layout = async ({ children }: { children: ReactNode }) => {
             </div>
           </div>
         </div>
-        <div className="mx-auto md:mt-7 mt-3 w-screen sm:min-w-[1440px] sm:w-[1440px]">
+        <div className="mx-auto md:mt-7 mt-3 w-[100vw] sm:max-w-[1320px] sm:w-[100vw]">
           {/* <Header session={session} isAdmin={isAdmin} /> */}
           <DynamicHeader session={session} isAdmin={isAdmin} />
 

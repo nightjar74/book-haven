@@ -1,4 +1,4 @@
-import { eq, desc, gt } from "drizzle-orm";
+import { eq, desc, gt, ilike } from "drizzle-orm";
 import { books } from "@/database/schema";
 
 export type CategoryContext = {
@@ -23,6 +23,11 @@ export const BOOK_CATEGORIES: Record<string, CategoryHandler> = {
 
   "Most Borrowed": (ctx) => {
     ctx.meta.orderBy = desc(books.borrowCount);
+    ctx.meta.limit = 50;
+  },
+
+  "Juvenile Fiction": (ctx) => {
+    ctx.where.push(ilike(books.genre, "%Juvenile Fiction%"));
     ctx.meta.limit = 50;
   },
 

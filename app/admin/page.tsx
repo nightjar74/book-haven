@@ -5,7 +5,7 @@ import ErrorBoundary from "@/components/errors/error-boundary";
 import { SkeletonChart, SkeletonLoader } from "./skeletons";
 import { redirect } from "next/navigation";
 
-const MyComponent = lazy(() => import("@/components/ui/LineChart"));
+const BarChart = lazy(() => import("@/components/ui/LineChart"));
 
 const Page = async (props: {
   searchParams?: Promise<{
@@ -44,7 +44,7 @@ const Page = async (props: {
         }
       >
         <Suspense fallback={<SkeletonChart />}>
-          <MyComponent searchParams={props.searchParams} />
+          <BarChart searchParams={props.searchParams} />
         </Suspense>
       </ErrorBoundary>
     </div>

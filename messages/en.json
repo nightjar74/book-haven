@@ -16,5 +16,19 @@
     "bookRequests": "Book Requests",
     "collections": "Collections",
     "borrowRequests": "Borrow Requests"
+  },
+  "Genres": {
+    "latestBooks": "Latest Books",
+    "computers": "Computers",
+    "JuvenileFiction": "Juvenile Fiction"
+  },
+  "notFound": {
+    "message": "404 - Page Not Found. The page you are looking for might have been",
+    "split": "removed, had its name changed, or is temporarily unavailable."
+  },
+  "category": {
+    "Latest Books": "Latest Books",
+    "Computers": "Computers",
+    "Juvenile Fiction": "Juvenile Fiction"
   }
 }

@@ -18,7 +18,7 @@ const Home = async () => {
     await Promise.all([
       db.select().from(books).limit(10).orderBy(desc(books.createdAt)),
       getBooksByGenres(["Computers"]),
-      getBooksByGenres(["Juvenile Fiction", "Education"]),
+      getBooksByGenres(["Juvenile Fiction"]),
       getCollections(),
     ]);
 
@@ -37,7 +37,7 @@ const Home = async () => {
         containerClassName="mt-[70px]"
       />
       <BookList
-        title="Juvenile Fiction/Education"
+        title="Juvenile Fiction"
         books={childrenBooks.slice(0)}
         containerClassName="mt-[70px]"
       />

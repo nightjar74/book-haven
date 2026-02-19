@@ -16,5 +16,19 @@
     "bookRequests": "Demandes de livres",
     "collections": "Collections",
     "borrowRequests": "Demandes d'emprunt"
+  },
+  "Genres": {
+    "latestBooks": "Dernières parutions",
+    "computers": "Informatique",
+    "JuvenileFiction": "Littérature jeunesse"
+  },
+  "notFound": {
+    "message": "404 - Page non trouvée. La page que vous recherchez pourrait avoir été",
+    "split": "supprimée, renommée ou être temporairement indisponible."
+  },
+  "category": {
+    "Latest Books": "Dernières parutions",
+    "Computers": "Informatique",
+    "Juvenile Fiction": "Littérature jeunesse"
   }
 }

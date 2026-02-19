@@ -21,7 +21,7 @@ export default function Pagination({ totalPages }: { totalPages: number }) {
 
   return (
     <>
-      <div className="inline-flex">
+      <div className="inline-flex" data-testid="pagination-container">
         <PaginationArrow
           direction="left"
           href={createPageURL(currentPage - 1)}
@@ -80,11 +80,17 @@ function PaginationNumber({
       "text-gray-300": position === "middle",
     },
   );
+  const isEllipsis = position === "middle";
+  const testId = isEllipsis
+    ? "pagination-ellipsis"
+    : `pagination-number-${page}`;
 
   return isActive || position === "middle" ? (
-    <div className={className}>{page}</div>
+    <div className={className} data-testid={testId}>
+      {page}
+    </div>
   ) : (
-    <Link href={href} className={className}>
+    <Link href={href} className={className} data-testid={testId}>
       {page}
     </Link>
   );
@@ -109,6 +115,8 @@ function PaginationArrow({
     },
   );
 
+  const testId = `pagination-arrow-${direction}`;
+
   const icon =
     direction === "left" ? (
       <ArrowLeft className="w-4" />
@@ -117,9 +125,11 @@ function PaginationArrow({
     );
 
   return isDisabled ? (
-    <div className={className}>{icon}</div>
+    <div className={className} data-testid={testId}>
+      {icon}
+    </div>
   ) : (
-    <Link className={className} href={href}>
+    <Link className={className} href={href} data-testid={testId}>
       {icon}
     </Link>
   );

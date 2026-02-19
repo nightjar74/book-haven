@@ -30,20 +30,20 @@ const text = [
 const CuratedCard = ({ data }: CuratedCardProps) => {
   const cards = !data ? text : data;
   return (
-    <div className="h-full w-full px-4 flex md:flex-col flex-row gap-2">
+    <div className="h-full w-full px-4 flex md:flex-col flex-row gap-3">
       {cards.map((item: any, index: number) => (
         <React.Fragment key={item.setNo}>
           <Link
             href={`/sets/${item.title}`}
-            className="h-[200px] group hidden relative md:grid grid-rows-1 w-full max-w-sm overflow-hidden rounded-xl border border-slate-200 bg-white p-4 text-left shadow-sm transition-all hover:shadow-md hover:bg-[#9d3128] active:scale-[0.98]"
+            className="flex-1 group hidden relative md:grid grid-rows-1 w-full md:max-w-[300px] max-w-sm overflow-hidden rounded-xl border border-slate-200 bg-white p-4 text-left shadow-sm transition-all hover:shadow-md hover:bg-[#9d3128] active:scale-[0.98]"
           >
-            <div className="flex flex-col pr-4 w-full h-7 justify-center mt-2">
-              <h3 className="text-xl font-normal tracking-tight text-gray-900 uppercase">
+            <div className="flex flex-col pr-4 w-full justify-center mt-2">
+              <h2 className="text-[1.25rem] leading-none font-normal tracking-tight text-gray-900 uppercase">
                 {item.title}
-              </h3>
+              </h2>
             </div>
-            <div className="flex w-full flex-row justify-between gap-2">
-              <p className="text-md text-gray-500 leading-tight mt-2">
+            <div className="flex w-full h-full flex-row justify-between gap-2">
+              <p className="text-md text-gray-500 leading-tight mt-4">
                 {item.subtitle}
               </p>
               <div className="relative h-24 w-24 flex-shrink-0 overflow-hidden rounded-full bg-red-50">

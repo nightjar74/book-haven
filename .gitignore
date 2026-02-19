@@ -62,3 +62,11 @@ bower_components
 psd
 thumb
 sketch
+
+# Playwright
+node_modules/
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
+/playwright/.auth/

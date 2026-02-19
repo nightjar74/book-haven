@@ -2,6 +2,29 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+  font-size: 93.75%;
+  -webkit-text-size-adjust: 100%;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+body {
+  @apply bg-white;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 @layer base {
   :root {
     --radius: 0.5rem;
@@ -89,7 +112,7 @@
 
   /* Book List */
   .book-list {
-    @apply mt-10 flex overflow-x-auto max-w-full scrollbar-hide gap-5 max-xs:justify-between xs:gap-9;
+    @apply mt-10 flex overflow-x-auto max-w-full scrollbar-hide gap-5 max-xs:justify-between xs:gap-[50px];
   }
 
   .book-list-wrap {
@@ -263,9 +286,33 @@
     @apply sticky h-40 w-full sm:top-0 sm:h-screen sm:flex-1;
   }
 
-  /* Root was bg-pattern bg-dark-100 */
-  .root-container {
+  /*   .root-container {
     @apply flex min-h-screen flex-1 flex-col bg-cover bg-top sm:px-5 xs:px-10 md:px-16;
+  } */
+
+  .root-container {
+    display: flex;
+    flex: 1 0 auto;
+    @apply flex flex-col flex-1;
+
+    min-height: 100dvh;
+    background-size: cover;
+    background-position: top;
+    @apply bg-cover bg-top;
+
+    @apply xs:px-10 sm:px-5 md:px-16;
+
+    width: 100%;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+
+    max-width: 100%;
+    margin: 0 auto;
+    overflow-x: hidden;
+    width: 100%;
+
+    @apply bg-cover bg-top;
+    @apply px-0 xs:px-10 md:px-16;
   }
 
   /* Book Details */
